@@ -17,7 +17,6 @@ class Movie(models.Model):
     title=models.CharField(max_length=30)
     description = models.CharField(max_length = 1000)
     url= models.CharField(max_length=100,default='' )
-    isViewed = models.BooleanField(default=False)
     image = models.CharField(max_length=60)
     def __str__(self):
         return self.title
@@ -27,5 +26,6 @@ class Movie(models.Model):
 class MovieList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='movie_lists')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='movie_lists')
+    isViewed = models.BooleanField(default=False)
     def __str__(self):
-        return f" {self.movie.title}"
+        return f" {self.movie.title} {self.isViewed}"
