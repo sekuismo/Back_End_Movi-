@@ -23,6 +23,7 @@ class Movie(models.Model):
     
 
     #El ISVIEWED debe estar en la entidad débil MovieList.
+    # AGREGAR UN ATRIBUTO BOOLEANO PARA VER SI SE ELIMINÓ O NO 
 class MovieList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='movie_lists')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='movie_lists')
