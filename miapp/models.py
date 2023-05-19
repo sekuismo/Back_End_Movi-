@@ -1,8 +1,7 @@
 from django.db import models
 
-
-
 class User(models.Model):
+
     name = models.CharField(max_length=100)
     password = models.CharField(max_length=40,default='')
     email= models.CharField(max_length=50)
@@ -14,6 +13,7 @@ class User(models.Model):
 # la llave foránea 
 
 class Movie(models.Model):
+
     title=models.CharField(max_length=30)
     description = models.CharField(max_length = 1000)
     url= models.CharField(max_length=100,default='' )
@@ -21,9 +21,10 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
     
-
+    # para funcion de eliminar pelicula se agrega el atributo boolean para ver si se elimino o no
     #El ISVIEWED debe estar en la entidad débil MovieList.
 class MovieList(models.Model):
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='movie_lists')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='movie_lists')
     isViewed = models.BooleanField(default=False)
