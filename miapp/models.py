@@ -3,9 +3,11 @@ from django.db import models
 class User(models.Model):
 
     name = models.CharField(max_length=100)
-    password = models.CharField(max_length=40,default='')
+    password = models.CharField(max_length=60,default='')
     email= models.CharField(max_length=50)
     avatar = models.CharField(max_length=100)
+    country = models.CharField(max_length=2)
+    date_added = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.name
 
@@ -14,10 +16,14 @@ class User(models.Model):
 
 class Movie(models.Model):
 
-    title=models.CharField(max_length=30)
-    description = models.CharField(max_length = 1000)
+    title= models.CharField(max_length=50)
+    description = models.CharField(max_length = 800)
+    # year = models.CharField()
+    language= models.CharField(max_length=2)
+    genre_name= models.CharField(max_length=20)
+    # genre_id= models.CharField()
     url= models.CharField(max_length=100,default='' )
-    image = models.CharField(max_length=60)
+    img_url = models.CharField(max_length=100)
     def __str__(self):
         return self.title
     
@@ -27,6 +33,7 @@ class MovieList(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='movie_lists')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='movie_lists')
-    isViewed = models.BooleanField(default=False)
+    is_viewed = models.BooleanField(default=False)
+    is_erased = models.BooleanField(default=False)
     def __str__(self):
-        return f" {self.movie.title} {self.isViewed}"
+        return f" {self.movie.title} {self.is_viewed}"
