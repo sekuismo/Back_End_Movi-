@@ -1,5 +1,5 @@
 from django.db import models
-
+#POSTGRES PORT 5432
 class Usuarios(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -8,6 +8,9 @@ class Usuarios(models.Model):
     avatar = models.CharField(max_length=100)
     country = models.CharField(max_length=2)
     date_added = models.DateTimeField()
+    
+    def __str__(self):
+        return f' {self.id} - {self.name}'
 
 class ListaDePeliculas(models.Model):
     id = models.AutoField(primary_key=True)
@@ -16,6 +19,8 @@ class ListaDePeliculas(models.Model):
     date_added = models.DateTimeField()
     user = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     movie = models.ForeignKey('Peliculas', on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.movie} - {self.user}'
 
 class Peliculas(models.Model):
     id = models.AutoField(primary_key=True)
@@ -27,3 +32,6 @@ class Peliculas(models.Model):
     genre_id = models.IntegerField()
     img_url = models.CharField(max_length=100)
     url = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.title}'
