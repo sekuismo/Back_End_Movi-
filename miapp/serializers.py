@@ -1,17 +1,17 @@
 from rest_framework import serializers
-from .models import User,Movie,MovieList
+from .models import Usuarios,Peliculas,ListaDePeliculas
 
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Movie
+        model = Peliculas
         fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
     movie_lists = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
-        model = User
+        model = Usuarios
         fields = '__all__'
 
 
@@ -20,5 +20,5 @@ class MovieListSerializer(serializers.ModelSerializer):
     movie = MovieSerializer(read_only=True)
 
     class Meta:
-        model = MovieList
+        model = ListaDePeliculas
         fields = '__all__'
