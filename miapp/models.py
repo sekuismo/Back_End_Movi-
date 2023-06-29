@@ -1,4 +1,5 @@
 from django.db import models
+
 #POSTGRES PORT 5432
 class Usuarios(models.Model):
     id = models.AutoField(primary_key=True)
@@ -17,8 +18,9 @@ class ListaDePeliculas(models.Model):
     is_viewed = models.BooleanField()
     is_erased = models.BooleanField()
     date_added = models.DateTimeField()
-    user = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    user = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='movie_lists')
     movie = models.ForeignKey('Peliculas', on_delete=models.CASCADE)
+    
     def __str__(self):
         return f'{self.movie} - {self.user}'
 
