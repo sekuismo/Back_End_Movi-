@@ -154,3 +154,6 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'miapp.Usuarios'
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]

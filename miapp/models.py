@@ -3,16 +3,12 @@ from django.contrib.auth.models import AbstractUser
 
 # POSTGRES PORT 5432
 class Usuarios(AbstractUser):
-    username = models.CharField(max_length=150, unique=True, default='') # al final utilizamos el modelo estandar de autenticación
     avatar = models.CharField(max_length=100)
     country = models.CharField(max_length=2)
     date_added = models.DateTimeField(auto_now_add=True)
-    password = models.CharField(max_length=128)  
 
-    
     def __str__(self):
         return self.username
-    
 
 class ListaDePeliculas(models.Model):
     id = models.AutoField(primary_key=True)
