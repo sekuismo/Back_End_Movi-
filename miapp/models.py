@@ -1,28 +1,30 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-#POSTGRES PORT 5432
-class Usuarios(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    password = models.CharField(max_length=60)
-    email = models.CharField(max_length=50,unique=True)  # Campo único
+# POSTGRES PORT 5432
+class Usuarios(AbstractUser):
+    username = models.CharField(max_length=150, unique=True, default='') # al final utilizamos el modelo estandar de autenticación
     avatar = models.CharField(max_length=100)
     country = models.CharField(max_length=2)
-    date_added = models.DateTimeField()
+    date_added = models.DateTimeField(auto_now_add=True)
+    password = models.CharField(max_length=128)  
+
     
     def __str__(self):
-        return f' {self.id} - {self.name}'
+        return self.username
+    
 
 class ListaDePeliculas(models.Model):
     id = models.AutoField(primary_key=True)
-    is_viewed = models.BooleanField()
+    is_viewed = models.BooleanField(default=False)  
     is_erased = models.BooleanField()
-    date_added = models.DateTimeField()
+    date_added = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name='movie_lists')
     movie = models.ForeignKey('Peliculas', on_delete=models.CASCADE)
     
     def __str__(self):
         return f'{self.movie} - {self.user}'
+
 
 class Peliculas(models.Model):
     id = models.AutoField(primary_key=True)
