@@ -30,3 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation.pop('password')
+        return representation

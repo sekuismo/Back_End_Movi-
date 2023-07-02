@@ -23,7 +23,7 @@ class ListaDePeliculas(models.Model):
 
 
 class Peliculas(models.Model):
-    id = models.AutoField(primary_key=True)
+    movie_id = models.IntegerField(primary_key=True,default=0)   #este será el campo único que vendrá desde la API
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=800)
     year = models.IntegerField()

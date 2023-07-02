@@ -41,8 +41,13 @@ def create(self, request, *args, **kwargs):
         'is_erased': request.data.get('is_erased', False),
     }
 
-    lista_serializer = self.get_serializer(data=lista_data)
+    lista_serializer = self.get_serializer(data=lista_data,partial=True) # partial = true permite modificar parcialmente
     lista_serializer.is_valid(raise_exception=True)
+    # Validar que el ID de la película exista antes de guardar
+    if not Peliculas.objects.filter(id=movie_id).exists():
+        return Response({'error': 'Movie does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+    
+
     lista_serializer.save()
     
     return Response(lista_serializer.data, status=status.HTTP_201_CREATED)
