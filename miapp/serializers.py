@@ -10,6 +10,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
 class MovieListSerializer(serializers.ModelSerializer):
     movie = MovieSerializer(read_only=True)
+    movie_id = serializers.IntegerField(required=True)
 
     class Meta:
         model = ListaDePeliculas
@@ -22,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
         fields = ['id', 'username','email', 'avatar', 'country', 'date_added', 'movie_lists', 'password']
+        #sabemos que está mal devolver la contraseña , sin embargo , fue la única manera en la que nos funcionó 
 
     def create(self, validated_data):
         user = super().create(validated_data)
