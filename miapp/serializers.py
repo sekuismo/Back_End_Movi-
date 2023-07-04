@@ -23,7 +23,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
         fields = ['id', 'username','email', 'avatar', 'country', 'date_added', 'movie_lists', 'password']
-        #sabemos que está mal devolver la contraseña , sin embargo , fue la única manera en la que nos funcionó 
 
     def create(self, validated_data):
         user = super().create(validated_data)
@@ -32,5 +31,5 @@ class UserSerializer(serializers.ModelSerializer):
         return user
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation.pop('password')
+        representation.pop('password') #elimina la contraseña para que no se represente en el Json
         return representation
